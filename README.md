@@ -25,28 +25,25 @@
 |category_id         |integer              |null: false                        |
 |state_id            |integer              |null: false                        |
 |fee_id              |integer              |null: false                        |
-|prefectures_id      |integer              |null: false                        |
-|days_id             |integer              |null: false                        |
+|prefecture_id       |integer              |null: false                        |
+|day_id              |integer              |null: false                        |
 |price               |integer              |null: false                        |
 |user                |references           |foreign_key: true                  |
 
 ### Association
-* belong_to :user
-* has_one   :buy
+* belongs_to :user
+* has_one   :buyer
 
 ## buyers table
 
 |Column              |Type                 |Options                            |
 |--------------------|---------------------|-----------------------------------|
-|buyer_info          |string               |null: false                        |
-|item_info           |string               |null: false                        |
 |user                |references           |foreign_key: true                  |
 |item                |references           |foreign_key: true                  |
-|address             |references           |foreign_key: true                  |
 
 ### Association
-* belong_to :user
-* has_one   :item
+* belongs_to :user
+* belongs_to :item
 * has_one   :address
 
 ## addresses table
@@ -54,7 +51,7 @@
 |Column              |Type                 |Options                            |
 |--------------------|---------------------|-----------------------------------|
 |postal_code         |string               |null: false                        |
-|prefectures_id      |integer              |null: false                        |
+|prefecture_id       |integer              |null: false                        |
 |municipalities      |string               |null: false                        |
 |house_number        |string               |null: false                        |
 |building_name       |string               |                                   |
@@ -62,4 +59,4 @@
 |buyer               |references           |foreign_key: true                  |
 
 ### Association
-* has_one   :buyer
+* belongs_to   :buyer
