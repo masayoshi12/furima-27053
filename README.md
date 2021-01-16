@@ -14,23 +14,27 @@
 
 ### Association
 * has_many  :items
-* has_many  :buys
+* has_many  :buyers
 
 ## items table
 
 |Column              |Type                 |Options                            |
 |--------------------|---------------------|-----------------------------------|
+|product_name        |string               |null: false                        |
 |explanation         |text                 |null: false                        |
-|detalise            |string               |null: false                        |
-|delivery            |string               |null: false                        |
-|price               |string               |null: false                        |
+|category_id         |integer              |null: false                        |
+|state_id            |integer              |null: false                        |
+|fee_id              |integer              |null: false                        |
+|prefectures_id      |integer              |null: false                        |
+|days_id             |integer              |null: false                        |
+|price               |integer              |null: false                        |
 |user                |references           |foreign_key: true                  |
 
 ### Association
-* belong_to :users
+* belong_to :user
 * has_one   :buy
 
-## buys table
+## buyers table
 
 |Column              |Type                 |Options                            |
 |--------------------|---------------------|-----------------------------------|
@@ -41,7 +45,7 @@
 |address             |references           |foreign_key: true                  |
 
 ### Association
-* belong_to :users
+* belong_to :user
 * has_one   :item
 * has_one   :address
 
@@ -49,13 +53,13 @@
 
 |Column              |Type                 |Options                            |
 |--------------------|---------------------|-----------------------------------|
-|potal_code          |string               |null: false                        |
+|postal_code         |string               |null: false                        |
 |prefectures_id      |integer              |null: false                        |
 |municipalities      |string               |null: false                        |
 |house_number        |string               |null: false                        |
-|bilding_name        |string               |                                   |
-|phone_number        |string               |null: false                        |
-|buy                 |references           |foreign_key: true                  |
+|building_name       |string               |                                   |
+|phone_number        |integer              |null: false                        |
+|buyer               |references           |foreign_key: true                  |
 
 ### Association
-* has_one   :buy
+* has_one   :buyer
