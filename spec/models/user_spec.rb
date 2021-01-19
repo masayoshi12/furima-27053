@@ -45,13 +45,19 @@ RSpec.describe User, type: :model do
       end
       it 'passwordが英数字混合６文字以上でないと登録できない' do
         @user.password = '1986122'
-        @user.password_confirmation　= '1986122'
+        @user.password_confirmation = '1986122'
         @user.valid?
         expect(@user.errors.full_messages).to include 'Password is invalid'
       end
       it 'passwordが英数のみでは登録できない' do
         @user.password = 'ABCDEFG'
-        @user.password_confirmation　= 'ABCDEFG'
+        @user.password_confirmation = 'ABCDEFG'
+        @user.valid?
+        expect(@user.errors.full_messages).to include 'Password is invalid'
+      end
+      it 'passwordが全角英数字混在では登録できない' do
+        @user.password = 'ＡＢＣＤＥ１２'
+        @user.password_confirmation = 'ＡＢＣＤＥ１２'
         @user.valid?
         expect(@user.errors.full_messages).to include 'Password is invalid'
       end
