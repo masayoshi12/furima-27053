@@ -8,7 +8,7 @@ FactoryBot.define do
     fee_id { 2 }
     prefecture_id { 2 }
     day_id { 2 }
-    price {Faker::Number.number(digits: 7) }
+    price { Faker::Number.number(digits: 7) }
     after(:build) do |item|
       item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
     end
