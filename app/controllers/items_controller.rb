@@ -7,6 +7,9 @@ class ItemsController < ApplicationController
     @items = Item.all.order('created_at DESC')
   end
 
+  def show
+  end
+
   def new
     @item = Item.new
   end
@@ -20,9 +23,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def edit
   end
 
@@ -32,6 +32,11 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to root_path
   end
 
   private
