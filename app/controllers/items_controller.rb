@@ -7,9 +7,6 @@ class ItemsController < ApplicationController
     @items = Item.all.order('created_at DESC')
   end
 
-  def show
-  end
-
   def new
     @item = Item.new
   end
@@ -23,15 +20,10 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
+  def show
   end
 
-  def update
-    if @item.update(item_params)
-      redirect_to item_path(@item)
-    else
-      render :edit
-    end
+  def edit
   end
 
   def destroy
@@ -42,6 +34,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      render :edit
+    end
+  end
+  
   private
 
   def item_params
