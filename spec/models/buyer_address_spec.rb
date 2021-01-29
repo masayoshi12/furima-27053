@@ -10,9 +10,9 @@ RSpec.describe BuyerAddress, type: :model do
         expect(@buyer_address).to be_valid
       end
     end
-    
+
     context '商品購入できないとき' do
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @buyer_address.token = nil
         @buyer_address.valid?
         expect(@buyer_address.errors.full_messages).to include("Token can't be blank")
@@ -22,20 +22,20 @@ RSpec.describe BuyerAddress, type: :model do
         @buyer_address.valid?
         expect(@buyer_address.errors.full_messages).to include "Postal code can't be blank"
       end
-      it '郵便番号に-が含まれていないと登録できない'do
-        @buyer_address.postal_code = 12345678
+      it '郵便番号に-が含まれていないと登録できない' do
+        @buyer_address.postal_code = 12_345_678
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include "Postal code is invalid"
+        expect(@buyer_address.errors.full_messages).to include 'Postal code is invalid'
       end
-      it '郵便番号が全角だと登録できない'do
-      @buyer_address.postal_code = "１００−００００"
-      @buyer_address.valid?
-      expect(@buyer_address.errors.full_messages).to include "Postal code is invalid"
+      it '郵便番号が全角だと登録できない' do
+        @buyer_address.postal_code = '１００−００００'
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include 'Postal code is invalid'
       end
       it '都道府県が選ばれてないと登録できない' do
         @buyer_address.prefecture_id = 1
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include "Prefecture must be other than 1"
+        expect(@buyer_address.errors.full_messages).to include 'Prefecture must be other than 1'
       end
       it '市区町村が空だと登録できない' do
         @buyer_address.municipalities = ''
@@ -55,12 +55,12 @@ RSpec.describe BuyerAddress, type: :model do
       it '電話番号が全角だと登録できない' do
         @buyer_address.phone_number = '０９０１２３４５６７８'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include "Phone number is invalid"
+        expect(@buyer_address.errors.full_messages).to include 'Phone number is invalid'
       end
       it '電話番号が数字以外だと登録できない' do
         @buyer_address.phone_number = 'ABC12345678'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include "Phone number is invalid"
+        expect(@buyer_address.errors.full_messages).to include 'Phone number is invalid'
       end
     end
   end

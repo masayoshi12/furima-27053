@@ -28,9 +28,9 @@ class ItemsController < ApplicationController
 
   def destroy
     if @item.destroy
-    redirect_to root_path
+      redirect_to root_path
     else
-    redirect_to item_path(item.id),method: :get
+      redirect_to item_path(item.id), method: :get
     end
   end
 
@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
-  
+
   private
 
   def item_params
