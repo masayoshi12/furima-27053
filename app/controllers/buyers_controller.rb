@@ -2,6 +2,7 @@ class BuyersController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!, only: [:index, :create]
   before_action :user_confirmation, only: [:index, :create]
+  before_action :item_confirmation, only: [:index, :create]
 
   def index
     @buyer_address = BuyerAddress.new
@@ -41,5 +42,9 @@ class BuyersController < ApplicationController
 
   def user_confirmation
     redirect_to root_path if current_user.id == @item.user_id
+  end
+
+  def item_confirmation
+    redirect_to root_path unless @item.buyer.nil?
   end
 end
