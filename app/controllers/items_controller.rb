@@ -2,12 +2,10 @@ class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :user_confirmation, only: [:edit, :update, :destroy]
+  before_action :item_confirmation, only: [:edit]
 
   def index
     @items = Item.all.order('created_at DESC')
-  end
-
-  def show
   end
 
   def new
@@ -23,7 +21,18 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def edit
+  end
+
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    else
+      redirect_to item_path(item.id), method: :get
+    end
   end
 
   def update
@@ -31,14 +40,6 @@ class ItemsController < ApplicationController
       redirect_to item_path(@item)
     else
       render :edit
-    end
-  end
-
-  def destroy
-    if @item.destroy
-    redirect_to root_path
-    else
-    redirect_to item_path(item.id),method: :get
     end
   end
 
@@ -55,5 +56,9 @@ class ItemsController < ApplicationController
 
   def user_confirmation
     redirect_to root_path unless current_user == @item.user
+  end
+
+  def item_confirmation
+    redirect_to root_path unless @item.buyer.nil?
   end
 end
