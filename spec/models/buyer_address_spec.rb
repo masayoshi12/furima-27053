@@ -19,7 +19,7 @@ RSpec.describe BuyerAddress, type: :model do
       it 'tokenが空では登録できないこと' do
         @buyer_address.token = nil
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Token can't be blank")
+        expect(@buyer_address.errors.full_messages).to include "Token can't be blank"
       end
       it '郵便番号が空だと登録できない' do
         @buyer_address.postal_code = ''
@@ -70,6 +70,16 @@ RSpec.describe BuyerAddress, type: :model do
         @buyer_address.phone_number = '123456789012'
         @buyer_address.valid?
         expect(@buyer_address.errors.full_messages).to include 'Phone number is invalid'
+      end
+      it 'user_idが空だと登録できない' do
+        @buyer_address.user_id = nil
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include "User can't be blank"
+      end
+      it 'item_idが空だと登録できない' do
+        @buyer_address.item_id = nil
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include "Item can't be blank"
       end
     end
   end

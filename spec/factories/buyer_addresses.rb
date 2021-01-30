@@ -6,5 +6,7 @@ FactoryBot.define do
     municipalities { '大田区' }
     house_number { '大森北０−０−０' }
     phone_number { Faker::Number.number(digits: 11) }
+    user_id { 1 }
+    item_id { 1 }
   end
 end
