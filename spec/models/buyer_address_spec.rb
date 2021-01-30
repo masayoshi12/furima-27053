@@ -6,7 +6,11 @@ RSpec.describe BuyerAddress, type: :model do
 
   describe '商品購入機能' do
     context '商品購入できるとき' do
-      it '全ての項目が存在すれば購入できる事' do
+      it '必須項目が存在すれば購入できる事' do
+        expect(@buyer_address).to be_valid
+      end
+      it '建物名が空でも購入できる' do
+        @buyer_address.building_name = ''
         expect(@buyer_address).to be_valid
       end
     end
@@ -59,6 +63,11 @@ RSpec.describe BuyerAddress, type: :model do
       end
       it '電話番号が数字以外だと登録できない' do
         @buyer_address.phone_number = 'ABC12345678'
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include 'Phone number is invalid'
+      end
+      it '電話番号が12桁以上だと登録できない' do
+        @buyer_address.phone_number = '123456789012'
         @buyer_address.valid?
         expect(@buyer_address.errors.full_messages).to include 'Phone number is invalid'
       end
